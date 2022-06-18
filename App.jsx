@@ -45,6 +45,13 @@ export default class App extends React.Component {
     // pega o operador
     const operator = splitNumbers[1];
 
+    // validação para não fazer o calculo se não tiver o segundo valor
+    if (!lastNumber) {
+      this.setState({ lastNumber: "" });
+      this.setState({ currentNumber: "" });
+      return;
+    }
+
     // faz as contas
     switch (operator) {
       case "+":
@@ -67,6 +74,11 @@ export default class App extends React.Component {
           currentNumber: (fistNumber / lastNumber).toString(),
         });
         return;
+      case "%":
+        this.setState({
+          currentNumber: ((fistNumber * lastNumber) / 100).toString(),
+        });
+        return;
     }
   }
 
@@ -77,7 +89,8 @@ export default class App extends React.Component {
       (buttonPressed === "+") |
         (buttonPressed === "-") |
         (buttonPressed === "*") |
-        (buttonPressed === "/")
+        (buttonPressed === "/") |
+        (buttonPressed === "%")
     ) {
       return;
     }
@@ -87,17 +100,17 @@ export default class App extends React.Component {
       (buttonPressed === "+") |
       (buttonPressed === "-") |
       (buttonPressed === "*") |
-      (buttonPressed === "/")
+      (buttonPressed === "/") |
+      (buttonPressed === "%")
     ) {
       if (
         this.state.currentNumber.includes("+") |
         this.state.currentNumber.includes("-") |
         this.state.currentNumber.includes("*") |
-        this.state.currentNumber.includes("/")
+        this.state.currentNumber.includes("/") |
+        this.state.currentNumber.includes("%")
       ) {
         this.calculator();
-
-        console.warn(this.state.currentNumber);
       } else {
         this.setState({
           currentNumber: this.state.currentNumber + " " + buttonPressed + " ",
@@ -126,6 +139,7 @@ export default class App extends React.Component {
         this.calculator();
         return;
       case "+/-":
+        this.setState({ currentNumber: this.state.currentNumber * -1 });
         return;
     }
 
@@ -135,6 +149,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#000" style="light" />
         <View style={styles.result}>
           <Text style={styles.historyText}>
             {this.state.lastNumber === "" ? " " : this.state.lastNumber}
