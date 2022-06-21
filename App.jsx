@@ -26,7 +26,6 @@ export default class App extends React.Component {
         "+",
         0,
         ".",
-        "+/-",
         "=",
       ],
       currentNumber: "",
@@ -39,7 +38,7 @@ export default class App extends React.Component {
     // cria um array
     const splitNumbers = this.state.currentNumber.split(" ");
     // pega o primeiro valor
-    const fistNumber = parseFloat(splitNumbers[0]);
+    const firstNumber = parseFloat(splitNumbers[0]);
     // pega o ultimo valor
     const lastNumber = parseFloat(splitNumbers[2]);
     // pega o operador
@@ -56,27 +55,27 @@ export default class App extends React.Component {
     switch (operator) {
       case "+":
         this.setState({
-          currentNumber: (fistNumber + lastNumber).toString(),
+          currentNumber: (firstNumber + lastNumber).toString(),
         });
         return;
       case "-":
         this.setState({
-          currentNumber: (fistNumber - lastNumber).toString(),
+          currentNumber: (firstNumber - lastNumber).toString(),
         });
         return;
       case "*":
         this.setState({
-          currentNumber: (fistNumber * lastNumber).toString(),
+          currentNumber: (firstNumber * lastNumber).toString(),
         });
         return;
       case "/":
         this.setState({
-          currentNumber: (fistNumber / lastNumber).toString(),
+          currentNumber: (firstNumber / lastNumber).toString(),
         });
         return;
       case "%":
         this.setState({
-          currentNumber: ((fistNumber * lastNumber) / 100).toString(),
+          currentNumber: ((firstNumber * lastNumber) / 100).toString(),
         });
         return;
     }
@@ -137,9 +136,6 @@ export default class App extends React.Component {
         this.setState({ lastNumber: this.state.currentNumber + " = " });
 
         this.calculator();
-        return;
-      case "+/-":
-        this.setState({ currentNumber: this.state.currentNumber * -1 });
         return;
     }
 
