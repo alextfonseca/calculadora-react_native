@@ -30,7 +30,6 @@ export default class App extends React.Component {
       ],
       currentNumber: "",
       lastNumber: "",
-      darkMode: false,
     };
   }
 
